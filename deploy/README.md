@@ -88,7 +88,7 @@ the host keeps the full history locally, one commit per snapshot, and pushes onl
 cd /opt/dire-states/fil-release/filecoin-fil-release
 sudo NO_PUSH=1 scripts/publish.sh calibnet   # commits, no push
 sudo scripts/publish.sh calibnet             # pushes
-sudo scripts/publish.sh mainnet              # ~5 min, ~MAINNET_RAM RAM
+sudo scripts/publish.sh mainnet              # ~5 min, ~2.3 GB RAM
 ```
 
 Each run ends with `<net>: published snapshot … as <commit>` and `<net>: done in <N>s`. The nodes
