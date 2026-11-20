@@ -1,0 +1,12 @@
+[Unit]
+Description=fil-release calibnet snapshot, 4 times a day
+
+[Timer]
+# After sector-spiegel (:00, :10) and message-mix (:30, :35), so runs on the host don't overlap.
+OnCalendar=*-*-* 00/6:40:00
+# Catch up on a run missed while the host was down.
+Persistent=true
+Unit=fil-release@calibnet.service
+
+[Install]
+WantedBy=timers.target

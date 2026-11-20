@@ -1,0 +1,17 @@
+# One fetch + commit + publish for a network: fil-release@calibnet / fil-release@mainnet.
+# Started by fil-release-<network>.timer; run by hand with `systemctl start fil-release@mainnet`.
+[Unit]
+Description=fil-release snapshot (%i)
+After=network-online.target
+Wants=network-online.target
+# Waits for a node that is still starting; ordering only, a stopped node fails the run cleanly.
+After=lotus@%i.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/dire-states/fil-release/filecoin-fil-release
+# A Node 26 tarball unpacked to /opt/dire-states/node takes precedence over a system node.
+Environment=PATH=/opt/dire-states/node/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=/usr/bin/env bash scripts/publish.sh %i
+Nice=10
+TimeoutStartSec=1h
